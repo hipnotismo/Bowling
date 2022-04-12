@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     private bool right;
     private bool up;
     private bool down;
+    private bool jump;
+
 
     // Update is called once per frame
 
@@ -20,6 +22,7 @@ public class Movement : MonoBehaviour
         right = false;
         up = false;
         down = false;
+        jump = false;
 
     }
     void Update()
@@ -59,6 +62,15 @@ public class Movement : MonoBehaviour
         {
             down = false;
         }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            jump = true;
+        }
+        else
+        {
+            jump = false;
+        }
     }
 
     private void FixedUpdate()
@@ -68,19 +80,29 @@ public class Movement : MonoBehaviour
             body.AddForce(new Vector3(-movementSpeed, 0, 0));
 
         }
+
         if (right)
         {
             body.AddForce(new Vector3(movementSpeed, 0, 0));
 
         }
+
         if (up)
         {
             body.AddForce(new Vector3(0, 0, movementSpeed));
 
         }
+
         if (down)
         {
             body.AddForce(new Vector3(0, 0, -movementSpeed));
+
+        }
+
+        if (jump)
+        {
+            body.AddForce(new Vector3(0, 90, 0));
+            Debug.Log("jump");
 
         }
     }
